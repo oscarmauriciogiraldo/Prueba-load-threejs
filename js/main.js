@@ -37,6 +37,6 @@ function animate(){
 
 }
 
-
+window.addEventListener();
 
 window.onload = init;
