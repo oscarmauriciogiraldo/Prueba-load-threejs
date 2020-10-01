@@ -8,7 +8,7 @@ function init(){
     //crea el mesh
     mesh = new THREE.Mesh(
         new THREE.BoxGeometry(1,1,1),
-        new THREE.MeshBasicMaterial({color:0xff9999, wireframe:true})
+        new THREE.MeshBasicMaterial({color:0xff9999, wireframe:false})
         //wireframe muestra el esqueleto del cubo si esta en true
     );
     //agrega la malla a la scena
