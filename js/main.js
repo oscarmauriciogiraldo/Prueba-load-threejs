@@ -37,7 +37,9 @@ function animate(){
 
 }
 
+function keyDown(event){}
 
+function keyUp(event){}
 
 window.addEventListener('keydown', keyDown);
 window.addEventListener('keyup', keyUp);
