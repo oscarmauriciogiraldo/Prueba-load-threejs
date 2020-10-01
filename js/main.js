@@ -37,6 +37,9 @@ function animate(){
 
 }
 
-window.addEventListener();
+
+
+window.addEventListener('keydown', keyDown);
+window.addEventListener('keyup', keyUp);
 
 window.onload = init;
