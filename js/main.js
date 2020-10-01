@@ -14,6 +14,10 @@ function init(){
     //agrega la malla a la scena
     scene.add(mesh);
 
+    //posicionamiento de la camara 
+    camera.position.set(0.0, -5);
+    camera.lookAt(new THREE.Vector3(0,0,0));
+
     //creando el renderer
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(1280, 720);
