@@ -2,6 +2,9 @@ var scene, camera, renderer, mesh;
 
 var keyboard = {};
 
+// creadno la variable player object
+var player = { height:1.8 };
+
 function init(){
     // Crea el objeto escena, utilizando la libreria three
     scene = new THREE.Scene();
