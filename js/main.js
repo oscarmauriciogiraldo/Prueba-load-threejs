@@ -10,7 +10,7 @@ function init(){
     //crea el mesh
     mesh = new THREE.Mesh(
         new THREE.BoxGeometry(1,1,1),
-        new THREE.MeshBasicMaterial({color:0xff9999, wireframe:false})
+        new THREE.MeshBasicMaterial({color:0x16525F, wireframe:false})
         //wireframe muestra el esqueleto del cubo si esta en true
     );
     //agrega la malla a la scena
@@ -35,6 +35,7 @@ function animate(){
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.02;
 
+    // rotacion 360 deljugador 
     if(keyboard[37]){//left arrow key
         camera.rotation.y += Math.PI * 0.01;
     }
