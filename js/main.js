@@ -41,6 +41,11 @@ function init(){
     //creando el renderer
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(1280, 720);
+    //agregar luces y sombras NOTA: las sombras no son tan necesarias
+    //sombras
+    renderer.shadowMap.enable = true;
+    renderer.shadowMap.type = THREE.BasicShadowMap
+    //luces
     document.body.appendChild(renderer.domElement);
 
     //s ellama la funcion animate
