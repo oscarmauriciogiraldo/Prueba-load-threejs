@@ -35,6 +35,14 @@ function animate(){
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.02;
 
+    if(keyboard[37]){//left arrow key
+        camera.rotation.y += Math.PI * 0.01;
+    }
+
+    if(keyboard[39]){
+        camera.rotation.y -= Math.PI * 0.01;
+    }
+
     renderer.render(scene, camera);
 
 }
