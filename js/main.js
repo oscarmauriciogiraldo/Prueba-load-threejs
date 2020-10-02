@@ -1,5 +1,7 @@
 var scene, camera, renderer, mesh;
 
+var keyboard = {};
+
 function init(){
     // Crea el objeto escena, utilizando la libreria three
     scene = new THREE.Scene();
