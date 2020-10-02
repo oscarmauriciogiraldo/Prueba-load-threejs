@@ -20,6 +20,17 @@ function init(){
     //agrega la malla a la scena
     scene.add(mesh);
 
+    //creando el objeto floor
+    meshFloor = new THREE.Mesh(
+        new THREE.PlaneGeometry(10, 10),
+        new THREE.MeshBasicMaterial({color:0xffffff, wireframe:true})
+    );
+    //rotar el meshfloor (el piso)
+    meshFloor.rotation.x += Math.PI / 2;
+    scene.add(meshFloor);
+
+
+
     //posicionamiento de la camara 
     camera.position.set(0, player.height, -5);
     // Agregando jugador a la camara 
