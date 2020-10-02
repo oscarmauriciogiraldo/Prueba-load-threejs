@@ -1,4 +1,5 @@
 var scene, camera, renderer, mesh;
+var meshFloor;
 
 var keyboard = {};
 
@@ -21,6 +22,7 @@ function init(){
 
     //posicionamiento de la camara 
     camera.position.set(0, player.height, -5);
+    // Agregando jugador a la camara 
     camera.lookAt(new THREE.Vector3(0, player.height,0));
 
     //creando el renderer
