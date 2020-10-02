@@ -20,8 +20,8 @@ function init(){
     scene.add(mesh);
 
     //posicionamiento de la camara 
-    camera.position.set(0.0, -5);
-    camera.lookAt(new THREE.Vector3(0,0,0));
+    camera.position.set(0, player.height, -5);
+    camera.lookAt(new THREE.Vector3(0, player.height,0));
 
     //creando el renderer
     renderer = new THREE.WebGLRenderer();
