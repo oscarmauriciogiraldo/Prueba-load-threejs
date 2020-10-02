@@ -39,9 +39,13 @@ function animate(){
 
 }
 
-function keyDown(event){}
+function keyDown(event){
+    keyboard[event.keyCode] = true;
+}
 
-function keyUp(event){}
+function keyUp(event){
+    keyboard[event.keyCode] = false;
+}
 
 window.addEventListener('keydown', keyDown);
 window.addEventListener('keyup', keyUp);
