@@ -4,7 +4,8 @@ var meshFloor;
 var keyboard = {};
 
 // creadno la variable player object
-var player = { height:1.8 };
+//var player = { height:1.8 };
+var player = { height:1.8, speed:0.2, turnSpeed:Math.PI*0.02 };
 
 function init(){
     // Crea el objeto escena, utilizando la libreria three
@@ -22,11 +23,11 @@ function init(){
 
     //creando el objeto floor
     meshFloor = new THREE.Mesh(
-        new THREE.PlaneGeometry(10, 10),
+        new THREE.PlaneGeometry(10, 10, 10, 10),
         new THREE.MeshBasicMaterial({color:0xffffff, wireframe:true})
     );
     //rotar el meshfloor (el piso)
-    meshFloor.rotation.x += Math.PI / 2;
+    meshFloor.rotation.x -= Math.PI / 2;
     scene.add(meshFloor);
 
 
@@ -50,6 +51,17 @@ function animate(){
     requestAnimationFrame(animate);
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.02;
+
+    //movimientos WASD añadir
+    // Keyboard movement inputs
+	if(keyboard[87]){ // W key
+		camera.position.x -= Math.sin(camera.rotation.y) * player.speed;
+		camera.position.z -= Math.cos(camera.rotation.y) * player.speed;
+	}
+	if(keyboard[83]){ // S key
+		camera.position.x += Math.sin(camera.rotation.y) * player.speed;
+		camera.position.z += Math.cos(camera.rotation.y) * player.speed;
+	}
 
     // rotacion 360 deljugador 
     if(keyboard[37]){//left arrow key
