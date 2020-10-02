@@ -18,6 +18,7 @@ function init(){
         new THREE.MeshBasicMaterial({color:0x16525F, wireframe:false})
         //wireframe muestra el esqueleto del cubo si esta en true
     );
+    mesh.position.y += 1; // Move the mesh up 1 meter
     //agrega la malla a la scena
     scene.add(mesh);
 
@@ -56,20 +57,20 @@ function animate(){
     // Keyboard movement inputs
 	if(keyboard[87]){ // W key
 		camera.position.x -= Math.sin(camera.rotation.y) * player.speed;
-		camera.position.z -= Math.cos(camera.rotation.y) * player.speed;
+		camera.position.z -= -Math.cos(camera.rotation.y) * player.speed;
 	}
 	if(keyboard[83]){ // S key
 		camera.position.x += Math.sin(camera.rotation.y) * player.speed;
-		camera.position.z += Math.cos(camera.rotation.y) * player.speed;
+		camera.position.z += -Math.cos(camera.rotation.y) * player.speed;
 	}
 
     // rotacion 360 deljugador 
     if(keyboard[37]){//left arrow key
-        camera.rotation.y += Math.PI * 0.01;
+        camera.rotation.y -= Math.PI * 0.01;
     }
 
     if(keyboard[39]){
-        camera.rotation.y -= Math.PI * 0.01;
+        camera.rotation.y += Math.PI * 0.01;
     }
 
     renderer.render(scene, camera);
