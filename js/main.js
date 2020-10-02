@@ -62,15 +62,24 @@ function animate(){
 	if(keyboard[83]){ // S key
 		camera.position.x += Math.sin(camera.rotation.y) * player.speed;
 		camera.position.z += -Math.cos(camera.rotation.y) * player.speed;
+    }
+    
+    if(keyboard[65]){ // A key
+		camera.position.x += Math.sin(camera.rotation.y + Math.PI/2) * player.speed;
+		camera.position.z += -Math.cos(camera.rotation.y + Math.PI/2) * player.speed;
+    }
+    if(keyboard[68]){ // D key
+		camera.position.x += Math.sin(camera.rotation.y - Math.PI/2) * player.speed;
+		camera.position.z += -Math.cos(camera.rotation.y - Math.PI/2) * player.speed;
 	}
 
     // rotacion 360 deljugador 
     if(keyboard[37]){//left arrow key
-        camera.rotation.y -= Math.PI * 0.01;
+        camera.rotation.y -= player.turnSpeed;
     }
 
     if(keyboard[39]){
-        camera.rotation.y += Math.PI * 0.01;
+        camera.rotation.y += player.turnSpeed;
     }
 
     renderer.render(scene, camera);
