@@ -25,7 +25,7 @@ function init(){
     //creando el objeto floor
     meshFloor = new THREE.Mesh(
         new THREE.PlaneGeometry(20, 20, 20, 20),
-        new THREE.MeshBasicMaterial({color:0xffffff, wireframe:false})
+        new THREE.MeshPhongMaterial({color:0xffffff, wireframe:false})
     );
     //rotar el meshfloor (el piso)
     meshFloor.rotation.x -= Math.PI / 2;
