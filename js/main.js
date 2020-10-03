@@ -15,7 +15,7 @@ function init(){
     //crea el mesh
     mesh = new THREE.Mesh(
         new THREE.BoxGeometry(1,1,1),
-        new THREE.MeshBasicMaterial({color:0x16525F, wireframe:false})
+        new THREE.MeshPhongMaterial({color:0x16525F, wireframe:false})
         //wireframe muestra el esqueleto del cubo si esta en true
     );
     mesh.position.y += 1; // Move the mesh up 1 meter
@@ -35,6 +35,14 @@ function init(){
     //luces
     ambientLiht = new THREE.AmbientLight(0xffffff, 0.2);
     scene.add(ambientLiht);
+
+    //punto de luz en la escena 
+    light = new THREE.PointLight(0xffffff, 0.8, 18);
+    light.position.set(-3,6,-3);
+    light.castShadow = true;
+    light.shadow.camera.near =0.1;
+    light.shadow.camera.far =25;
+    scene.add(light);
 
     //posicionamiento de la camara 
     camera.position.set(0, player.height, -5);
