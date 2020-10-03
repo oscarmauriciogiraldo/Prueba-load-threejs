@@ -29,6 +29,8 @@ function init(){
     );
     //rotar el meshfloor (el piso)
     meshFloor.rotation.x -= Math.PI / 2;
+    //el piso no necesita sombras
+    meshFloor.receiveShadow = true;
     scene.add(meshFloor);
 
 
