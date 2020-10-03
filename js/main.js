@@ -24,14 +24,17 @@ function init(){
 
     //creando el objeto floor
     meshFloor = new THREE.Mesh(
-        new THREE.PlaneGeometry(10, 10, 10, 10),
-        new THREE.MeshBasicMaterial({color:0xffffff, wireframe:true})
+        new THREE.PlaneGeometry(20, 20, 20, 20),
+        new THREE.MeshBasicMaterial({color:0xffffff, wireframe:false})
     );
     //rotar el meshfloor (el piso)
     meshFloor.rotation.x -= Math.PI / 2;
     scene.add(meshFloor);
 
 
+    //luces
+    ambientLiht = new THREE.AmbientLight(0xffffff, 0.2);
+    scene.add(ambientLiht);
 
     //posicionamiento de la camara 
     camera.position.set(0, player.height, -5);
@@ -41,11 +44,13 @@ function init(){
     //creando el renderer
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(1280, 720);
+
     //agregar luces y sombras NOTA: las sombras no son tan necesarias
     //sombras
     renderer.shadowMap.enable = true;
-    renderer.shadowMap.type = THREE.BasicShadowMap
-    //luces
+    renderer.shadowMap.type = THREE.BasicShadowMap;
+
+    
     document.body.appendChild(renderer.domElement);
 
     //s ellama la funcion animate
