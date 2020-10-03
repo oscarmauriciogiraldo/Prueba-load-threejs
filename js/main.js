@@ -1,11 +1,11 @@
 var scene, camera, renderer, mesh;
-var meshFloor;
+var meshFloor, ambientLight, light;
 
 var keyboard = {};
-
 // creadno la variable player object
 //var player = { height:1.8 };
 var player = { height:1.8, speed:0.2, turnSpeed:Math.PI*0.02 };
+var USE_WIREFRAME = false;
 
 function init(){
     // Crea el objeto escena, utilizando la libreria three
@@ -15,41 +15,45 @@ function init(){
     //crea el mesh
     mesh = new THREE.Mesh(
         new THREE.BoxGeometry(1,1,1),
-        new THREE.MeshPhongMaterial({color:0x16525F, wireframe:false})
+        new THREE.MeshPhongMaterial({color:0x16525F, wireframe:USE_WIREFRAME})
         //wireframe muestra el esqueleto del cubo si esta en true
     );
-    mesh.position.y += 1; // Move the mesh up 1 meter
-    //agrega la malla a la scena
-    scene.add(mesh);
+    mesh.position.y += 1;
+	// The cube can have shadows cast onto it, and it can cast shadows
+	mesh.receiveShadow = true;
+	mesh.castShadow = true;
+	scene.add(mesh);
 
     //creando el objeto floor
     meshFloor = new THREE.Mesh(
-        new THREE.PlaneGeometry(20, 20, 20, 20),
-        new THREE.MeshPhongMaterial({color:0xffffff, wireframe:false})
+        new THREE.PlaneGeometry(10,10, 10,10),
+        new THREE.MeshPhongMaterial({color:0xffffff, wireframe:USE_WIREFRAME})
     );
     //rotar el meshfloor (el piso)
     meshFloor.rotation.x -= Math.PI / 2;
-    //el piso no necesita sombras
+    //el piso no necesita sombras (resive la sombre del cubo)
     meshFloor.receiveShadow = true;
     scene.add(meshFloor);
 
 
     //luces
-    ambientLiht = new THREE.AmbientLight(0xffffff, 0.2);
-    scene.add(ambientLiht);
+    ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+	scene.add(ambientLight);
 
     //punto de luz en la escena 
     light = new THREE.PointLight(0xffffff, 0.8, 18);
     light.position.set(-3,6,-3);
     light.castShadow = true;
-    light.shadow.camera.near =0.1;
-    light.shadow.camera.far =25;
+    //
+    light.shadow.camera.near = 0.1;
+    light.shadow.camera.far = 25;
     scene.add(light);
+    
 
     //posicionamiento de la camara 
     camera.position.set(0, player.height, -5);
-    // Agregando jugador a la camara 
     camera.lookAt(new THREE.Vector3(0, player.height,0));
+    //Agregando jugador a la camara 
 
     //creando el renderer
     renderer = new THREE.WebGLRenderer();
@@ -57,10 +61,9 @@ function init(){
 
     //agregar luces y sombras NOTA: las sombras no son tan necesarias
     //sombras
-    renderer.shadowMap.enable = true;
+    renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.BasicShadowMap;
 
-    
     document.body.appendChild(renderer.domElement);
 
     //s ellama la funcion animate
