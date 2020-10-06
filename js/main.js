@@ -59,12 +59,15 @@ function init(){
     \************************************************************************ */
 
     // otra forma 
-    texture = new THREE.TextureLoader().load("../crate0/crate0_bump.png");
+    texture = new THREE.TextureLoader().load("../crate0/crate0_diffuse.png");
+    crateBumpMap = new THREE.TextureLoader().load("../crate0/crate0_bump.png");
+    crateNormalMap = new THREE.TextureLoader().load("../crate0/crate0_normal.png");
 
     //var geometry = new THREE.BoxBufferGeometry( 200, 200, 200 );
 	//var material = new THREE.MeshBasicMaterial( { map: texture } );
 
     //variable tectura carga
+
     /*
     var textureLoader = new THREE.TextureLoader();
     crateTexture = new textureLoader.load('crate0/crate0_diffuse.png');
@@ -76,7 +79,9 @@ function init(){
         new THREE.MeshPhongMaterial({
             //color:0xffffff,
             //map:crateTexture
-            map:texture
+            map:texture,
+            bumpMap:crateBumpMap,
+            normalMap:crateNormalMap
         })
     );
     scene.add(crate);
@@ -88,6 +93,9 @@ function init(){
     /* /************************************************************************\ 
     /************************************************************************\ 
     \************************************************************************ */
+
+
+    //***************************objeto 3d load ***************************** */
 
     //posicionamiento de la camara 
     camera.position.set(0, player.height, -5);
@@ -114,6 +122,9 @@ function animate(){
     requestAnimationFrame(animate);
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.02;
+
+    //movimiento del cubo con textura
+    crate.rotation.y +=0.01;
 
     //movimientos WASD añadir
     // Keyboard movement inputs
