@@ -104,6 +104,15 @@ function init(){
         objLoader.setMaterials(materials);
 
         objLoader.load("../models/cactus_tall.obj", function(mesh){
+            
+            //propiedades sombras
+            mesh.traverse(function(node){
+               if (node instanceof THREE.Mesh) {
+                   node.castShadow = true;
+                   node.receiveShadow = true;
+               }
+            });
+
            scene.add(mesh)
            mesh.position.set(-5, 0, 4);
            mesh.rotation.y = -Math.PI/4;
