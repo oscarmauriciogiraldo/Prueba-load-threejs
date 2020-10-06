@@ -1,6 +1,9 @@
 var scene, camera, renderer, mesh;
 var meshFloor, ambientLight, light;
 
+// variables para las texturas
+var crate, crateTexture, crateNormalMap, crateBumpMap, texture;
+
 var keyboard = {};
 // creadno la variable player object
 //var player = { height:1.8 };
@@ -48,7 +51,43 @@ function init(){
     light.shadow.camera.near = 0.1;
     light.shadow.camera.far = 25;
     scene.add(light);
-    
+
+    //parte de texturas, crea un nuebo cubo
+
+    /* /************************************************************************\ 
+    /************************************************************************\ 
+    \************************************************************************ */
+
+    // otra forma 
+    texture = new THREE.TextureLoader().load("../crate0/crate0_bump.png");
+
+    //var geometry = new THREE.BoxBufferGeometry( 200, 200, 200 );
+	//var material = new THREE.MeshBasicMaterial( { map: texture } );
+
+    //variable tectura carga
+    /*
+    var textureLoader = new THREE.TextureLoader();
+    crateTexture = new textureLoader.load('crate0/crate0_diffuse.png');
+    */
+
+    /*crate = new THREE.Mesh( geometry, material );*/
+    crate = new THREE.Mesh(
+        new THREE.BoxGeometry( 3, 3, 3 ),
+        new THREE.MeshPhongMaterial({
+            //color:0xffffff,
+            //map:crateTexture
+            map:texture
+        })
+    );
+    scene.add(crate);
+    //se mueve el crate = cube para otra posicion 
+    crate.position.set(2.5, 3/2, 2.5);
+    //que reciba sombras 
+    crate.receiveShadow = true;
+    crate.castShadow = true; 
+    /* /************************************************************************\ 
+    /************************************************************************\ 
+    \************************************************************************ */
 
     //posicionamiento de la camara 
     camera.position.set(0, player.height, -5);
