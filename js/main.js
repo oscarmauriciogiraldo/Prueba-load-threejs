@@ -10,6 +10,17 @@ var keyboard = {};
 var player = { height:1.8, speed:0.2, turnSpeed:Math.PI*0.02 };
 var USE_WIREFRAME = false;
 
+
+//variable carga de ventana o pantalla
+var loadScreen = {
+    scene: new THREE.Scene(),
+    camera: new THREE.PerspectiveCamera(990, 1280/720, 0.1, 1000),
+    box: new THREE.Mesh(
+        new THREE.BoxGeometry(0.5,0.5,0.5),
+        new THREE.MeshBasicMaterial({ color:0xA658FF })
+    )
+};
+
 function init(){
     // Crea el objeto escena, utilizando la libreria three
     scene = new THREE.Scene();
@@ -97,13 +108,13 @@ function init(){
 
     //***************************objeto 3d load ***************************** */
     var mtlLoader = new THREE.MTLLoader();
-    mtlLoader.load("../models/cactus_tall.mtl", function(materials){
+    mtlLoader.load("../models/tree_detailed.mtl", function(materials){
 
         materials.preload();
         var objLoader = new THREE.OBJLoader();
         objLoader.setMaterials(materials);
 
-        objLoader.load("../models/cactus_tall.obj", function(mesh){
+        objLoader.load("../models/tree_detailed.obj", function(mesh){
             
             //propiedades sombras
             mesh.traverse(function(node){
