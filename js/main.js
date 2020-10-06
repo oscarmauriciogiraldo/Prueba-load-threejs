@@ -104,7 +104,9 @@ function init(){
         objLoader.setMaterials(materials);
 
         objLoader.load("../models/cactus_tall.obj", function(mesh){
-           scene.add(mesh) 
+           scene.add(mesh)
+           mesh.position.set(-5, 0, 4);
+           mesh.rotation.y = -Math.PI/4;
         });
     });
 
