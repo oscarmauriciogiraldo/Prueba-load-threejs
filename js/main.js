@@ -12,24 +12,14 @@ var USE_WIREFRAME = false;
 
 
 //variable carga de ventana o pantalla
-/*var loadingScreen = {
+var loadingScreen = {
     scene: new THREE.Scene(),
-    camera: new THREE.PerspectiveCamera(90, 1280/720, 0.1, 1000),
+    camera: new THREE.PerspectiveCamera(990, 1280/720, 0.1, 1000),
     box: new THREE.Mesh(
         new THREE.BoxGeometry(0.5,0.5,0.5),
         new THREE.MeshBasicMaterial({ color:0xA658FF })
     )
-};*/
-
-var loadingScreen = {
-	scene: new THREE.Scene(),
-	camera: new THREE.PerspectiveCamera(90, 1280/720, 0.1, 100),
-	box: new THREE.Mesh(
-		new THREE.BoxGeometry(0.5,0.5,0.5),
-		new THREE.MeshBasicMaterial({ color:0x4444ff })
-	)
 };
-
 
 var RESOURCES_LOADED = false;
 
@@ -39,25 +29,11 @@ function init(){
     camera = new THREE.PerspectiveCamera(90, 1280/720, 0.1, 1000);
 
     //variable loading screen
-    // Set up the loading screen's scene.
-	// It can be treated just like our main scene.
-	loadingScreen.box.position.set(0,0,5);
-	loadingScreen.camera.lookAt(loadingScreen.box.position);
-	loadingScreen.scene.add(loadingScreen.box);
+    loadingScreen.box.position.set(0,0,5);
+    loadingScreen.camera.lookAt(loadingScreen.box.position);
+    loadingScreen.scene.add(loadingScreen.box);
+
     
-    // se agregaron antes de pasar a la funcion animate
-	// Create a loading manager to set RESOURCES_LOADED when appropriate.
-	// Pass loadingManager to all resource loaders.
-	loadingManager = new THREE.LoadingManager();
-	
-	loadingManager.onProgress = function(item, loaded, total){
-		console.log(item, loaded, total);
-	};
-	
-	loadingManager.onLoad = function(){
-		console.log("loaded all resources");
-		RESOURCES_LOADED = true;
-	};
 
     //crea el mesh
     mesh = new THREE.Mesh(
@@ -163,6 +139,29 @@ function init(){
         });
     });
 
+    /*var mtlLoader = new THREE.MTLLoader();
+    mtlLoader.load("../models/ship_wreck.mtl", function(materials){
+
+        materials.preload();
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load("../models/ship_wreck.obj", function(mesh){
+            
+            //propiedades sombras
+            mesh.traverse(function(node){
+               if (node instanceof THREE.Mesh) {
+                   node.castShadow = true;
+                   node.receiveShadow = true;
+               }
+            });
+
+           scene.add(mesh)
+           mesh.position.set(-7, 0, 4);
+           mesh.rotation.y = -Math.PI/4;
+        });
+    });*/
+
     // Model/material loading!
 	/*var mtlLoader = new THREE.MTLLoader();
 	mtlLoader.load("../models/Tent_Poles_01.mtl", function(materials){
@@ -214,20 +213,15 @@ function init(){
 
 function animate(){
 
-    //loading screen
-    if (RESOURCES_LOADED == false) {
+    //animacion load screen
+    if ( RESOURCES_LOADED == false) {
         requestAnimationFrame(animate);
 
-        loadingScreen.box.position.x -= 0.05;
-        if(loadingScreen.box.position.x < -10 ) loadingScreen.box.position.x = 10;
-        loadingScreen.box.position.y = Math.sin(loadingScreen.box.position.x);
-
         renderer.render(loadingScreen.scene, loadingScreen.camera);
-		return; // Stop the function here.
-    } 
+        return;
+    }
 
     requestAnimationFrame(animate);
-
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.02;
 
