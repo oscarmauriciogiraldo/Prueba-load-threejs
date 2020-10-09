@@ -21,6 +21,8 @@ var loadingScreen = {
     )
 };
 
+var LOADING_MANAGER = null;
+
 var RESOURCES_LOADED = false;
 
 function init(){
@@ -32,6 +34,19 @@ function init(){
     loadingScreen.box.position.set(0,0,5);
     loadingScreen.camera.lookAt(loadingScreen.box.position);
     loadingScreen.scene.add(loadingScreen.box);
+
+    //loading manager para que ingrese al juego 
+    /*loadingManager = new THREE.loadingManager();
+
+    loadingManager.onProgress = function(item, loaded, total){
+        console.log(item, loaded, total);
+    };
+
+    loadingManager.onLoad = function() {
+        console.log("loaded all resources");
+        RESOURCES_LOADED = true;
+    };*/
+
 
     
 
@@ -139,14 +154,14 @@ function init(){
         });
     });
 
-    /*var mtlLoader = new THREE.MTLLoader();
-    mtlLoader.load("../models/ship_wreck.mtl", function(materials){
+    /**/var mtlLoader = new THREE.MTLLoader();
+    mtlLoader.load("../models/pirate_captain.mtl", function(materials){
 
         materials.preload();
         var objLoader = new THREE.OBJLoader();
         objLoader.setMaterials(materials);
 
-        objLoader.load("../models/ship_wreck.obj", function(mesh){
+        objLoader.load("../models/pirate_captain.obj", function(mesh){
             
             //propiedades sombras
             mesh.traverse(function(node){
@@ -157,10 +172,10 @@ function init(){
             });
 
            scene.add(mesh)
-           mesh.position.set(-7, 0, 4);
+           mesh.position.set(-9, 0, -5);
            mesh.rotation.y = -Math.PI/4;
         });
-    });*/
+    });
 
     // Model/material loading!
 	/*var mtlLoader = new THREE.MTLLoader();
@@ -214,12 +229,16 @@ function init(){
 function animate(){
 
     //animacion load screen
-    if ( RESOURCES_LOADED == false) {
+    /*if ( RESOURCES_LOADED == false) {
         requestAnimationFrame(animate);
+
+        loadingScreen.box.position.x -= 0.05;
+        if (loadingScreen.box.position.x < -10)loadingScreen.box.position.x = 10;       
+        loadingScreen.box.position.y = Math.sin(loadingScreen.box.position.x);
 
         renderer.render(loadingScreen.scene, loadingScreen.camera);
         return;
-    }
+    }*/
 
     requestAnimationFrame(animate);
     mesh.rotation.x += 0.01;
